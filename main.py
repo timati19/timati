@@ -1,14 +1,16 @@
 import sys
 import random
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtGui import QPainter, QColor
 
 
 class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setGeometry(100, 100, 400, 400)
+        self.pushButton = QPushButton(self)
+        self.pushButton.setText("Push Me")
+        self.pushButton.setGeometry(160, 330, 80, 22)
         self.pushButton.clicked.connect(self.paint)
         self.do_paint = False
 
@@ -24,7 +26,7 @@ class MyWidget(QMainWindow):
         self.repaint()
 
     def draw_circle(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
+        qp.setBrush(QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
         diameter = random.randint(10, 100)
         qp.drawEllipse(random.randint(0, 400), random.randint(0, 400), diameter, diameter)
 
